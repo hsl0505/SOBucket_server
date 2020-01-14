@@ -38,6 +38,7 @@ app.use(
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
+  // test용
   res.status(200).send('Success');
 });
 

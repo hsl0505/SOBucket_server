@@ -1,5 +1,5 @@
-const { users } = require("../../models");
+const { users } = require('../../models');
 
 module.exports = {
-  post: (req, res) => {}
+  post: (req, res) => {},
 };
