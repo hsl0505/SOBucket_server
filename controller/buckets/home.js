@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable array-callback-return */
 /* eslint-disable arrow-parens */
 /* eslint-disable object-curly-newline */
