@@ -4,29 +4,37 @@ module.exports = (sequelize, DataTypes) => {
     'users',
     {
       email: DataTypes.STRING,
+      userName: DataTypes.STRING,
+      userNickName: DataTypes.STRING,
       password: DataTypes.STRING,
-      phone: DataTypes.INTEGER,
+      phone: DataTypes.STRING,
       avatar: DataTypes.STRING,
       signupDate: DataTypes.DATE,
       isBlack: DataTypes.STRING,
       blackReason: DataTypes.STRING,
       auth: DataTypes.STRING,
-      like_bucket: DataTypes.INTEGER,
     },
-    {},
+    {
+      hooks: {
+        beforeCreate: (data, option) => {
+          const shasum = crypto.createHmac('sha512', 'SOBucketSecret');
+          shasum.update(data.password);
+          data.password = shasum.digest('hex');
+        },
+        beforeFind: (data, option) => {
+          if (data.where.password) {
+            const shasum = crypto.createHmac('sha512', 'SOBucketSecret');
+            shasum.update(data.where.password);
+            data.where.password = shasum.digest('hex');
+          }
+        },
+      },
+    },
   );
   users.associate = function(models) {
-    // associations can be defined here
-    // users.hasMany(models.like_user_bucket);
-    // users.belongsTo(models.like_user_bucket, {
-    //   foreignKey: 'like_bucket',
-    // });
-    users.hasMany(models.bucketlist);
     users.hasMany(models.comments);
-    users.belongsTo(models.like_user_bucket, {
-      foreignKey: 'like_bucket',
-      targetKey: 'like_bucket',
-    });
+    users.hasMany(models.likes);
+    users.hasMany(models.bucketlists);
   };
   return users;
 };
