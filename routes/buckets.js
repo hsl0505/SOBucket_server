@@ -13,6 +13,9 @@ router.post('/fork', bucketController.fork.post);
 // * GET /buckets/home
 router.get('/home', bucketController.home.get);
 
+// * GET /buckets/home/today
+router.get('/home/today', bucketController.today.get);
+
 // * POST /buckets/like
 router.post('/like', bucketController.like.post);
 

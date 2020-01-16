@@ -6,4 +6,5 @@ module.exports = {
   mypage: require('./mypage'),
   mypageId: require('./mypageId'),
   pid: require('./pid'),
+  today: require('./today'),
 };
