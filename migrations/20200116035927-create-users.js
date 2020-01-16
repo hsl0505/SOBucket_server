@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       signupDate: {
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
       },
       isBlack: {
         type: Sequelize.STRING,
