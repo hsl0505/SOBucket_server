@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const cors = require('cors');
-const session = require('express-session');
+// const session = require('express-session');
 const cookieParser = require('cookie-parser');
 // const FileStore = require("session-file-store")(session);
 
@@ -15,19 +15,19 @@ const bucketsRouter = require('./routes/buckets');
 const app = express();
 const port = 3001;
 
-app.use(
-  session({
-    secret: '@halibolisky',
-    resave: false,
-    saveUninitialized: true,
-    // ,store: new FileStore()
+// app.use(
+//   session({
+//     secret: '@halibolisky',
+//     resave: false,
+//     saveUninitialized: true,
+//     // ,store: new FileStore()
 
-    // rebase test용
+//     // rebase test용
 
-    // test!!
-    // js's test!!
-  }),
-);
+//     // test!!
+//     // js's test!!
+//   }),
+// );
 
 app.use(cookieParser());
 app.use(bodyParser.json());
