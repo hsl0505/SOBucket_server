@@ -17,6 +17,9 @@ module.exports = {
       content: {
         type: Sequelize.STRING,
       },
+      likeCount: {
+        type: Sequelize.INTEGER,
+      },
       expectedDate: {
         type: Sequelize.DATE,
       },

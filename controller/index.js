@@ -1,4 +1,4 @@
 module.exports = {
-  bucketsController: require('./buckets'),
+  bucketController: require('./buckets'),
   userController: require('./user'),
 };
