@@ -3,11 +3,21 @@ const jwt = require('jsonwebtoken');
 const TOKEN_SECRET = 'SOBucketSecret';
 
 const tokenGenerator = (data, callback) => {
-  const token = jwt.sign(data, TOKEN_SECRET, {
-    algorithm: 'HS256',
-    expiresIn: 1000 * 60 * 60 * 24,
-  });
-  callback(token);
+  jwt.sign(
+    data,
+    TOKEN_SECRET,
+    {
+      algorithm: 'HS256',
+      expiresIn: 1000 * 60 * 60 * 24,
+    },
+    (err, token) => {
+      if (err) {
+        console.error(err);
+      } else {
+        callback(token);
+      }
+    },
+  );
 };
 
 const isValid = (token, callback) => {
@@ -17,13 +27,13 @@ const isValid = (token, callback) => {
     } else {
       const exp = new Date(decode.exp * 1000);
       const now = Date.now();
-      const day = 1000 * 60 * 60 * 24;
+      // const day = 1000 * 60 * 60 * 24;
       if (exp < now) {
         callback({ isValid: false });
-      } else if (exp < now + 5 * day) {
-        // console.log("=========Token Helper: Generate New Token")
-        const newToken = module.exports.generateToken(decode.user.id);
-        callback({ isValid: true, token: newToken, userInfo: decode });
+        // } else if (exp < now + 5 * day) {
+        //   // console.log("=========Token Helper: Generate New Token")
+        //   const newToken = module.exports.generateToken(decode.user.id);
+        //   callback({ isValid: true, token: newToken, userInfo: decode });
       } else {
         // console.log("=========Token Helper: Token is valid")
         callback({ isValid: true, token: token, userInfo: decode });
@@ -46,7 +56,7 @@ const tokenHandler = (req, res, next) => {
   }
 };
 
-export default {
+module.exports = {
   tokenGenerator,
   isValid,
   tokenHandler,
