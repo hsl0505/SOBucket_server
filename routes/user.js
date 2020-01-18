@@ -7,6 +7,9 @@ const { userController } = require('../controller');
 // * GET /user/info
 router.get('/info', userController.info.get);
 
+// * POST /user/info
+router.post('/info', userController.info.post);
+
 // * POST /user/login
 router.post('/login', userController.login.post);
 
