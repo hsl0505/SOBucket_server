@@ -7,4 +7,5 @@ module.exports = {
   mypageId: require('./mypageId'),
   pid: require('./pid'),
   today: require('./today'),
+  search: require('./search'),
 };
