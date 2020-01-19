@@ -16,6 +16,9 @@ router.get('/home', bucketController.home.get);
 // * GET /buckets/home/today
 router.get('/home/today', bucketController.today.get);
 
+// * GET /buckets/search?q=value
+router.get('/search', bucketController.today.get);
+
 // * POST /buckets/like
 router.post('/like', bucketController.like.post);
 
