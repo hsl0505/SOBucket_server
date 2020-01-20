@@ -8,5 +8,6 @@ module.exports = {
   pid: require('./pid'),
   today: require('./today'),
   search: require('./search'),
+  image: require('./image'),
   test: require('./test'),
 };
