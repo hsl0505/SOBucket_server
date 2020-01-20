@@ -1,8 +1,13 @@
 const AWS = require('aws-sdk');
+require('dotenv').config();
 
-const s3bucketName = 'practice-sobucket-image';
-const bucketRegion = 'ap-northeast-2'; // 아시아 태평양 (서울)
-const IdentityPoolId = 'ap-northeast-2:b25ab6a0-f378-4576-84b9-29780bcc172f';
+const s3bucketName = process.env.S3_BUCKETNAME;
+const bucketRegion = process.env.S3_REGION;
+const IdentityPoolId = process.env.S3_POOLID;
+
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const { isValid } = require('./tokenhelper');
 
 AWS.config.update({
   region: bucketRegion,
@@ -16,21 +21,27 @@ const s3 = new AWS.S3({
   params: { Bucket: s3bucketName },
 });
 
-// client에서 보내준 파일이 파라미터, key는 이메일로 해쉬할 것
-const uploadToS3 = (file, key, callback) => {
-  const uploadParams = { Bucket: s3bucketName, Key: key, Body: '' };
+const storage = multerS3({
+  s3: s3,
+  bucket: s3bucketName, // s3 생성시 버킷명
+  acl: 'public-read', // 업로드 된 데이터를 URL로 읽을 때 설정하는 값
+  metadata: (req, file, cb) => {
+    cb(null, { fieldName: file.fieldname }); // 파일 메타정보 저장
+  },
+  key: (req, file, cb) => {
+    const { token } = req.cookies;
+    console.log('token : ', token);
+    let userId = 'no_user_id';
+    if (token) {
+      isValid(token, validToken => {
+        userId = validToken.userInfo.id;
+      });
+    }
+    cb(null, `${userId}_avatar_${file.originalname}`); // key, 저장될 파일명과 같이 저장
+  },
+});
 
-  // Configure the file stream and obtain the upload parameters body
-  const fs = require('fs');
-  const fileStream = fs.createReadStream(file);
-  fileStream.on('error', err => {
-    console.log('File Error', err);
-  });
-  uploadParams.Body = fileStream;
-
-  // call S3 to retrieve upload file to specified bucket
-  s3.upload(uploadParams, callback);
-};
+const uploadToS3 = multer({ storage: storage }).single('file');
 
 // db에서 읽어온 경로가 파라미터
 const retrieveFromS3 = (path, callback) => {
