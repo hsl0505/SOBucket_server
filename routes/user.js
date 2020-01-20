@@ -4,6 +4,9 @@ const router = express.Router();
 
 const { userController } = require('../controller');
 
+// * POST /user/avatar
+router.post('/avatar', userController.avatar.post);
+
 // * GET /user/info
 router.get('/info', userController.info.get);
 
@@ -21,8 +24,5 @@ router.post('/resign', userController.resign.post);
 
 // * POST /user/signup
 router.post('/signup', userController.signup.post);
-
-// * POST /user/update
-router.post('/update', userController.update.post);
 
 module.exports = router;
