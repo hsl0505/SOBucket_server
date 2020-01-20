@@ -1,9 +1,5 @@
 const { users } = require('../../models');
-const {
-  tokenGenerator,
-  isValid,
-  tokenHandler,
-} = require('../../utils/tokenhelper');
+const { tokenGenerator } = require('../../utils/tokenhelper');
 
 module.exports = {
   post: (req, res) => {
@@ -14,7 +10,10 @@ module.exports = {
       .then(result => {
         if (result) {
           tokenGenerator(
-            { id: result.id, userName: result.userName, email: result.email },
+            {
+              id: result.id,
+              userNickName: result.userNickName,
+            },
             token => {
               console.log('token generate normally');
               res.cookie('token', token);
