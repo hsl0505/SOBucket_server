@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       auth: DataTypes.STRING,
     },
     {
+      underscored: false,
       hooks: {
         beforeCreate: (data, option) => {
           const shasum = crypto.createHmac('sha512', 'SOBucketSecret');
@@ -37,7 +38,11 @@ module.exports = (sequelize, DataTypes) => {
   users.associate = function(models) {
     users.hasMany(models.comments);
     users.hasMany(models.likes);
-    users.hasMany(models.bucketlists);
+    users.hasMany(models.bucketlists, {
+      foreignKey: 'user_id',
+      onDelete: 'cascade',
+      onUpdate: 'no action',
+    });
   };
   return users;
 };

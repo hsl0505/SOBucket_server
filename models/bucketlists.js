@@ -10,12 +10,14 @@ module.exports = (sequelize, DataTypes) => {
       expectedDate: DataTypes.DATE,
       user_id: DataTypes.INTEGER,
     },
-    {},
+    { underscored: false },
   );
   bucketlists.associate = function(models) {
     bucketlists.hasMany(models.comments);
     bucketlists.belongsTo(models.users, {
       foreignKey: 'user_id',
+      onDelete: 'cascade',
+      onUpdate: 'no action',
     });
   };
   return bucketlists;
