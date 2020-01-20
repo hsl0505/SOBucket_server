@@ -1,4 +1,4 @@
-const { bucketlist } = require('../../models');
+const { bucketlists } = require('../../models');
 
 module.exports = {
   post: (req, res) => {},
