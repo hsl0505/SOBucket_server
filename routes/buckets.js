@@ -31,4 +31,7 @@ router.get('/mypage/:id', bucketController.mypageId.get);
 // * GET /buckets/pid/<:id>
 router.get('/pid/:id', bucketController.pid.get);
 
+// Mock-up data for test, /buckets/test
+router.post('/test', bucketController.test.post);
+
 module.exports = router;
