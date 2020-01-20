@@ -43,7 +43,7 @@ module.exports = {
         image: `이미지테스트${i}`,
         content: `내용테스트${i}`,
         likeCount: i,
-        expetedDate: new Date(),
+        expectedDate: new Date(),
       };
       if (i >= 1 && i <= 6) {
         obj.user_id = 1;
