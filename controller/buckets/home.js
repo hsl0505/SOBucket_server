@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable array-callback-return */
 /* eslint-disable arrow-parens */
@@ -20,38 +22,50 @@ module.exports = {
       });
     }
 
+    console.log(userId);
+
     bucketlists
       .findAll({
         order: sequelize.random(),
+        include: [
+          { model: users, attributes: ['userNickName', 'userNickName'] },
+          { model: likes, attributes: ['user_id'] },
+        ],
+        attributes: [
+          'id',
+          'title',
+          'content',
+          'image',
+          'expectedDate',
+          'createdAt',
+          'likeCount',
+        ],
         limit: 8,
-        include: [users],
       })
       .then(data => {
-        data.map(ele => {
-          const obj = {};
-          obj.id = ele.id; // 버킷 id
-          obj.title = ele.title; // 버킷 타이틀
-          obj.content = ele.content; // 버킷 내용
-          obj.image = ele.image; // 버킷 이미지
-          obj.userNickName = ele.user.userNickName; // 유저 닉네임
-          obj.expectedDate = ele.expectedDate; // 버킷 완료날짜
-          obj.createdAt = ele.createdAt; // 버킷 만들어진 시간
-          obj.likeCount = ele.likeCount; // 버킷의 좋아요
-          obj.mylike = false; // 내가 과거에 좋아요 눌렀는가
-
-          if (userId) {
-            likes.findOne({ where: { bucket_id: ele.id } }).then(likedata => {
-              if (likedata.user_id === userId) {
-                obj.mylike = true;
-              }
-              result.bucketList.push(obj);
-            });
-          } else {
-            result.bucketList.push(obj);
+        for (let i = 0; i < data.length; i++) {
+          const obj = {
+            id: data[i].id,
+            title: data[i].title,
+            content: data[i].content,
+            image: data[i].image,
+            expectedDate: data[i].expectedDate,
+            createdAt: data[i].createdAt,
+            likeCount: data[i].likeCount,
+            userNickName: data[i].user.userNickName,
+            mylike: false,
+          };
+          for (let j = 0; j < data[i].likes.length; j++) {
+            if (data[i].likes[j].user_id === userId) {
+              obj.mylike = true;
+              break;
+            }
           }
-        });
+          result.bucketList.push(obj);
+        }
       })
       .then(() => {
+        // console.log(temp);
         res.status(200).json(result);
       })
       .catch(err => {
