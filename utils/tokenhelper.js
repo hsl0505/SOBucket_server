@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const TOKEN_SECRET = 'SOBucketSecret';
+require('dotenv').config();
+
+const TOKEN_SECRET = process.env.T_TOKEN_SECRET;
 
 const tokenGenerator = (data, callback) => {
   jwt.sign(
