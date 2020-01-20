@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const crypto = require('crypto');
 
 module.exports = (sequelize, DataTypes) => {
@@ -20,15 +22,33 @@ module.exports = (sequelize, DataTypes) => {
     {
       hooks: {
         beforeCreate: (data, option) => {
-          const shasum = crypto.createHmac('sha512', 'SOBucketSecret');
+          console.log('beforeCreate activated!');
+          const shasum = crypto.createHmac('sha512', process.env.CRYPTO_SECRET);
           shasum.update(data.password);
           data.password = shasum.digest('hex');
         },
         beforeFind: (data, option) => {
+          console.log('beforeFind activated!');
           if (data.where.password) {
-            const shasum = crypto.createHmac('sha512', 'SOBucketSecret');
+            const shasum = crypto.createHmac(
+              'sha512',
+              process.env.CRYPTO_SECRET,
+            );
             shasum.update(data.where.password);
             data.where.password = shasum.digest('hex');
+          }
+        },
+        beforeUpdate: (data, option) => {
+          console.log('beforeUpdate activated!');
+          console.log('before update data : ', data);
+          if (data.dataValues.password) {
+            console.log('data dataValues activated!!!');
+            const shasum = crypto.createHmac(
+              'sha512',
+              process.env.CRYPTO_SECRET,
+            );
+            shasum.update(data.dataValues.password);
+            data.dataValues.password = shasum.digest('hex');
           }
         },
       },
