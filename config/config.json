@@ -1,9 +1,0 @@
-{
-  "development": {
-    "username": "bucket",
-    "password": "kfcTwister!1",
-    "database": "bucket",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
-}
