@@ -34,7 +34,7 @@ module.exports = {
         );
     } else {
       likes
-        .destroy({ where: { user_id: userId } })
+        .destroy({ where: { user_id: userId, bucket_id: bucketId } })
         .then(() =>
           bucketlists
             .update(
