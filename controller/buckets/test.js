@@ -80,7 +80,7 @@ module.exports = {
       }
     }
 
-    users.bulkCreate(userArr).then(() => {
+    users.bulkCreate(userArr, { individualHooks: true }).then(() => {
       bucketlists.bulkCreate(bucketArr).then(() => {
         likes.bulkCreate(likeArr).then(() => res.status(200).send('ok'));
       });
