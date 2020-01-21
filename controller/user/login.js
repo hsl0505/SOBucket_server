@@ -17,7 +17,9 @@ module.exports = {
             token => {
               console.log('token generate normally');
               res.cookie('token', token);
-              return res.status(200).json({ id: result.id });
+              return res
+                .status(200)
+                .json({ id: result.id, userNickName: result.userNickName });
             },
           );
         } else {
