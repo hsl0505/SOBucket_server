@@ -9,11 +9,8 @@ const { isValid } = require('../../utils/tokenhelper');
 
 module.exports = {
   get: (req, res) => {
-    // 로그인 안되어있는 상태
     const { token } = req.cookies;
-
     const result = { bucketList: [] };
-
     let userId = null;
 
     if (token) {
@@ -65,7 +62,6 @@ module.exports = {
         }
       })
       .then(() => {
-        // console.log(temp);
         res.status(200).json(result);
       })
       .catch(err => {
