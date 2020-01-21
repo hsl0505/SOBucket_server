@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable arrow-parens */
-const { bucketlist } = require('../../models');
+const { bucketlists } = require('../../models');
 const { isValid } = require('../../utils/tokenhelper');
 
 module.exports = {
@@ -8,7 +8,6 @@ module.exports = {
     let userId;
     const { token } = req.cookies;
     if (token) {
-      // 여기 비동기적으로 될까? -> 토큰헬퍼 리펙토링 되는지..
       isValid(token, validToken => {
         userId = validToken.userInfo.id;
       });
@@ -16,7 +15,7 @@ module.exports = {
 
     const { title, image, content, expectedDate } = req.body;
 
-    bucketlist
+    bucketlists
       .create({
         title,
         image,
@@ -25,7 +24,7 @@ module.exports = {
         expectedDate,
         user_id: userId,
       })
-      .then(() => res.send(200).send('ok'))
+      .then(result => res.status(200).json(result))
       .catch(err => {
         console.log(err);
         res.status(404).send(err);
