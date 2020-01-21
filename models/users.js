@@ -14,10 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       phone: DataTypes.STRING,
       avatar: DataTypes.STRING,
-      signupDate: DataTypes.DATE,
-      isBlack: DataTypes.STRING,
+      isBlack: DataTypes.BOOLEAN,
       blackReason: DataTypes.STRING,
-      auth: DataTypes.STRING,
+      auth: DataTypes.BOOLEAN,
     },
     {
       underscored: false,

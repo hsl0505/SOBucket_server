@@ -26,17 +26,14 @@ module.exports = {
       avatar: {
         type: Sequelize.STRING,
       },
-      signupDate: {
-        type: Sequelize.DATE,
-      },
       isBlack: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
       blackReason: {
         type: Sequelize.STRING,
       },
       auth: {
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
