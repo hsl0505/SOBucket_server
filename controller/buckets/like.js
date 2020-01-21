@@ -1,4 +1,7 @@
-const { bucketlist, likes, Sequelize } = require('../../models');
+/* eslint-disable function-paren-newline */
+/* eslint-disable arrow-parens */
+/* eslint-disable implicit-arrow-linebreak */
+const { bucketlists, likes, Sequelize } = require('../../models');
 const { isValid } = require('../../utils/tokenhelper');
 
 module.exports = {
@@ -12,6 +15,9 @@ module.exports = {
     }
     const { isLike, bucketId } = req.body;
 
+    // console.log('여긴 뭘까요', typeof userId);
+    // console.log('쿠키', req.cookies);
+
     if (isLike) {
       likes
         .create({
@@ -19,23 +25,23 @@ module.exports = {
           bucket_id: bucketId,
         })
         .then(() =>
-          bucketlist
+          bucketlists
             .update(
               { likeCount: Sequelize.literal('likeCount + 1') },
               { where: { id: bucketId } },
             )
-            .then(() => res.send(200).send('ok')),
+            .then(() => res.status(200).send('ok')),
         );
     } else {
       likes
-        .destroy({ where: { user_id: userId } })
+        .destroy({ where: { user_id: userId, bucket_id: bucketId } })
         .then(() =>
-          bucketlist
+          bucketlists
             .update(
               { likeCount: Sequelize.literal('likeCount - 1') },
               { where: { id: bucketId } },
             )
-            .then(() => res.send(200).send('ok')),
+            .then(() => res.status(200).send('ok')),
         );
     }
   },

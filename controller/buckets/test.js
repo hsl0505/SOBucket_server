@@ -9,12 +9,12 @@ module.exports = {
     // res.status(200).send('ok');
     const userArr = [];
     /*
-    유저는 15명, 피드는 20개, 각 피드는 좋아요 0~19개, 좋아요 총 갯수는 210개, 코멘트는 0개
-    1번 유저 : 피드 6개 (1~6) / 각 피드의 좋아요 갯수 (1 ~ 6)
-    2번 유저 : 피드 5개 (7 ~ 11) / (7 ~ 11)
-    3번 유저 : 피드 4개 (12 ~ 15)/ (12 ~ 15)
-    4번 유저 : 피드 3개 (16~ 18)/ (16~ 18)
-    5번 유저 : 피드 2개 (19,20)/ (19,20)
+    유저는 15명, 피드는 20개, 각 피드는 좋아요 0~19개, 좋아요 총 갯수는 15개, 코멘트는 0개
+    1번 유저 : 피드 6개 (1~6) / 1번 피드 5개 (1,2,3,4,5 유저)
+    2번 유저 : 피드 5개 (7 ~ 11) / 7번피드 4개 (6,7,8,9 유저)
+    3번 유저 : 피드 4개 (12 ~ 15)/ 12번피드 3개 (10,11,12 유저)
+    4번 유저 : 피드 3개 (16~ 18)/ 16번 피드 2개 (13,14 유저)
+    5번 유저 : 피드 2개 (19,20)/ 19번 피드 1개 (15유저)
     6번 유저~ 15번유저 : 피드 0개
     */
 
@@ -42,18 +42,33 @@ module.exports = {
         title: `타이틀테스트${i}`,
         image: `이미지테스트${i}`,
         content: `내용테스트${i}`,
-        likeCount: i,
+        likeCount: 0,
         expectedDate: new Date(),
       };
       if (i >= 1 && i <= 6) {
+        if (i === 1) {
+          obj.likeCount = 5;
+        }
         obj.user_id = 1;
       } else if (i >= 7 && i <= 11) {
+        if (i === 7) {
+          obj.likeCount = 4;
+        }
         obj.user_id = 2;
       } else if (i >= 12 && i <= 15) {
+        if (i === 12) {
+          obj.likeCount = 3;
+        }
         obj.user_id = 3;
       } else if (i >= 16 && i <= 18) {
+        if (i === 16) {
+          obj.likeCount = 2;
+        }
         obj.user_id = 4;
       } else if (i >= 19 && i <= 20) {
+        if (i === 19) {
+          obj.likeCount = 1;
+        }
         obj.user_id = 5;
       }
       bucketArr.push(obj);
@@ -61,23 +76,21 @@ module.exports = {
 
     // 좋아요 생성
     const likeArr = [];
-    for (let i = 1; i <= 20; i++) {
-      for (let j = 1; j <= i; j++) {
-        const obj = {};
-        obj.bucket_id = i;
-        if (i >= 1 && i <= 6) {
-          obj.user_id = 1;
-        } else if (i >= 7 && i <= 11) {
-          obj.user_id = 2;
-        } else if (i >= 12 && i <= 15) {
-          obj.user_id = 3;
-        } else if (i >= 16 && i <= 18) {
-          obj.user_id = 4;
-        } else if (i >= 19 && i <= 20) {
-          obj.user_id = 5;
-        }
-        likeArr.push(obj);
+    for (let i = 1; i <= 15; i++) {
+      const obj = {};
+      obj.user_id = i;
+      if (i >= 1 && i <= 5) {
+        obj.bucket_id = 1;
+      } else if (i >= 6 && i <= 9) {
+        obj.bucket_id = 7;
+      } else if (i >= 10 && i <= 12) {
+        obj.bucket_id = 12;
+      } else if (i >= 13 && i <= 14) {
+        obj.bucket_id = 16;
+      } else if (i === 15) {
+        obj.bucket_id = 9;
       }
+      likeArr.push(obj);
     }
 
     users.bulkCreate(userArr, { individualHooks: true }).then(() => {

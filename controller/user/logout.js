@@ -1,6 +1,8 @@
 module.exports = {
   post: (req, res) => {
-    res.clearCookie('token');
-    res.redirect(200, '/');
+    res
+      .clearCookie('token')
+      .status(200)
+      .send('ok');
   },
 };

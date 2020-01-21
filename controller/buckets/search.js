@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable array-callback-return */
 /* eslint-disable arrow-parens */
 /* eslint-disable object-curly-newline */
@@ -6,6 +7,7 @@ const { isValid } = require('../../utils/tokenhelper');
 
 module.exports = {
   get: (req, res) => {
+    console.log(req.cookies);
     const { q } = req.query;
     const { token } = req.cookies;
     const result = { searchBuckets: [] };
@@ -20,37 +22,46 @@ module.exports = {
 
     bucketlists
       .findAll({
-        include: [users],
         where: {
           title: {
             [Op.like]: `%${q}%`,
           },
         },
+        include: [
+          { model: users, attributes: ['userNickName', 'userNickName'] },
+          { model: likes, attributes: ['user_id'] },
+        ],
+        attributes: [
+          'id',
+          'title',
+          'content',
+          'image',
+          'expectedDate',
+          'createdAt',
+          'likeCount',
+        ],
       })
       .then(data => {
-        data.map(ele => {
-          const obj = {};
-          obj.id = ele.id; // 버킷 아이디
-          obj.title = ele.title; // 버킷 타이틀
-          obj.content = ele.content; // 버킷 내용
-          obj.image = ele.image; // 버킷 이미지
-          obj.userNickName = ele.user.userNickName; // 유저 닉네임
-          obj.expectedDate = ele.expectedDate; // 버킷 예상일자
-          obj.createdAt = ele.createdAt; // 버킷 생성일
-          obj.likeCount = ele.likeCount; // 버킷 좋아요수
-          obj.mylike = false;
-
-          if (userId) {
-            likes.findOne({ where: { bucket_id: ele.id } }).then(likedata => {
-              if (likedata.user_id === userId) {
-                obj.mylike = true;
-              }
-              result.searchBuckets.push(obj);
-            });
-          } else {
-            result.searchBuckets.push(obj);
+        for (let i = 0; i < data.length; i++) {
+          const obj = {
+            id: data[i].id,
+            title: data[i].title,
+            content: data[i].content,
+            image: data[i].image,
+            expectedDate: data[i].expectedDate,
+            createdAt: data[i].createdAt,
+            likeCount: data[i].likeCount,
+            userNickName: data[i].user.userNickName,
+            mylike: false,
+          };
+          for (let j = 0; j < data[i].likes.length; j++) {
+            if (data[i].likes[j].user_id === userId) {
+              obj.mylike = true;
+              break;
+            }
           }
-        });
+          result.searchBuckets.push(obj);
+        }
       })
       .then(() => {
         res.status(200).json(result);
