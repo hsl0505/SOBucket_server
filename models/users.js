@@ -55,8 +55,16 @@ module.exports = (sequelize, DataTypes) => {
     },
   );
   users.associate = function(models) {
-    users.hasMany(models.comments);
-    users.hasMany(models.likes);
+    users.hasMany(models.comments, {
+      foreignKey: 'user_id',
+      onDelete: 'cascade',
+      onUpdate: 'no action',
+    });
+    users.hasMany(models.likes, {
+      foreignKey: 'user_id',
+      onDelete: 'cascade',
+      onUpdate: 'no action',
+    });
     users.hasMany(models.bucketlists, {
       foreignKey: 'user_id',
       onDelete: 'cascade',

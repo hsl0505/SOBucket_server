@@ -11,9 +11,13 @@ module.exports = (sequelize, DataTypes) => {
   likes.associate = function(models) {
     likes.belongsTo(models.users, {
       foreignKey: 'user_id',
+      onDelete: 'cascade',
+      onUpdate: 'no action',
     });
     likes.belongsTo(models.bucketlists, {
       foreignKey: 'bucket_id',
+      onDelete: 'cascade',
+      onUpdate: 'no action',
     });
   };
   return likes;

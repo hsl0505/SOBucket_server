@@ -12,9 +12,13 @@ module.exports = (sequelize, DataTypes) => {
   comments.associate = function(models) {
     comments.belongsTo(models.users, {
       foreignKey: 'user_id',
+      onDelete: 'cascade',
+      onUpdate: 'no action',
     });
     comments.belongsTo(models.bucketlists, {
       foreignKey: 'bucket_id',
+      onDelete: 'cascade',
+      onUpdate: 'no action',
     });
   };
   return comments;
