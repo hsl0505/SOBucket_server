@@ -34,4 +34,10 @@ router.get('/pid/:id', bucketController.pid.get);
 // Mock-up data for test, /buckets/test
 router.post('/test', bucketController.test.post);
 
+// * POST /buckets/image
+router.post('/image', bucketController.image.post);
+
+// * POST /buckets/pid/<:id>
+router.post('/comment', bucketController.comment.post);
+
 module.exports = router;

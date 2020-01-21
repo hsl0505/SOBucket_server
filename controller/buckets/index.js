@@ -9,5 +9,6 @@ module.exports = {
   today: require('./today'),
   search: require('./search'),
   image: require('./image'),
+  comment: require('./comment'),
   test: require('./test'),
 };
