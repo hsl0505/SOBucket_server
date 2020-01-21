@@ -37,7 +37,7 @@ const storage = multerS3({
         userId = validToken.userInfo.id;
       });
     }
-    cb(null, `${userId}_avatar_${file.originalname}`); // key, 저장될 파일명과 같이 저장
+    cb(null, `${userId}_image_${file.originalname}`); // key, 저장될 파일명과 같이 저장
   },
 });
 

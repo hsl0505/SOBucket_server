@@ -1,8 +1,8 @@
 const multer = require('multer');
 // const fs = require('fs');
-const { users } = require('../../models');
+// const { users } = require('../../models');
 const { uploadToS3 } = require('../../utils/imagehelper');
-const { isValid } = require('../../utils/tokenhelper');
+// const { isValid } = require('../../utils/tokenhelper');
 
 module.exports = {
   post: (req, res, next) => {
@@ -25,22 +25,22 @@ module.exports = {
       // console.log('크기 : ', req.file.size);
       console.log('경로 : ', req.file.location); // s3 업로드시 업로드 url을 가져옴
 
-      let userId = '';
-      isValid(req.cookies.token, validToken => {
-        userId = validToken.userInfo.id;
-      });
-      users
-        .update(
-          { avatar: `${req.file.location}` },
-          {
-            where: { id: userId },
-          },
-        )
-        .catch(err => {
-          res.sendStatus(400);
-        });
+      // let userId = '';
+      // isValid(req.cookies.token, validToken => {
+      //   userId = validToken.userInfo.id;
+      // });
+      // users
+      //   .update(
+      //     { avatar: `${req.file.location}` },
+      //     {
+      //       where: { id: userId },
+      //     },
+      //   )
+      //   .catch(err => {
+      //     res.sendStatus(400);
+      //   });
 
-      return res.sendStatus(200);
+      return res.status(200).send(req.file.location);
     });
   },
 };
