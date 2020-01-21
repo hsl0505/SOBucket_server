@@ -10,7 +10,7 @@ const tokenGenerator = (data, callback) => {
     TOKEN_SECRET,
     {
       algorithm: 'HS256',
-      expiresIn: 1000 * 60 * 60 * 24,
+      expiresIn: '1d',
     },
     (err, token) => {
       if (err) {
