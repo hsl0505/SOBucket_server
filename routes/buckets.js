@@ -28,6 +28,9 @@ router.get('/mypage', bucketController.mypage.get);
 // * GET /buckets/mypage/<:id>
 router.get('/mypage/:id', bucketController.mypageId.get);
 
+// * GET /buckets/findLikeList
+router.get('/findLikeList', bucketController.findLikeList.get);
+
 // * GET /buckets/pid/<:id>
 router.get('/pid/:id', bucketController.pid.get);
 
