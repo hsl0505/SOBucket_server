@@ -11,4 +11,5 @@ module.exports = {
   image: require('./image'),
   comment: require('./comment'),
   test: require('./test'),
+  findLikeList: require('./findLikeList'),
 };
