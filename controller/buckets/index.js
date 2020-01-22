@@ -12,4 +12,5 @@ module.exports = {
   comment: require('./comment'),
   test: require('./test'),
   findLikeList: require('./findLikeList'),
+  update: require('./update'),
 };
