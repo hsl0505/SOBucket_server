@@ -28,7 +28,7 @@ module.exports = {
         console.log('created');
         // console.log('plain result : ', result);
         // console.log('get result : ', result.get({ plain: true }));
-        return res.status(200).json(result); // Created
+        return res.status(200).send('OK'); // Created
       })
       .catch(error => {
         console.log(error);
