@@ -2,6 +2,8 @@ const FormData = require('form-data');
 
 const fs = require('fs');
 
+const https = require('https');
+
 const { users } = require('../../models');
 
 const { isValid } = require('../../utils/tokenhelper');
@@ -10,7 +12,6 @@ module.exports = {
   get: (req, res) => {
     const { token } = req.cookies;
     let userId = '';
-    const formdata = new FormData();
     isValid(token, validToken => {
       userId = validToken.userInfo.id;
     });
@@ -24,13 +25,14 @@ module.exports = {
         createdAt,
         avatar,
       } = result;
-
-      formdata.append('avatar', fs.createReadStream(avatar));
-      formdata.append(
-        'json',
-        JSON.stringify({ email, userName, userNickName, phone, createdAt }),
-      );
-      res.status(200).send(formdata);
+      res.status(200).json({
+        email: email,
+        userName: userName,
+        userNickName: userNickName,
+        phone: phone,
+        avatar: avatar,
+        createdAt: createdAt,
+      });
     });
   },
   post: (req, res) => {
