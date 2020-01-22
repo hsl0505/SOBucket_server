@@ -43,4 +43,7 @@ router.post('/image', bucketController.image.post);
 // * POST /buckets/pid/<:id>
 router.post('/comment', bucketController.comment.post);
 
+// * POST /buckets/update
+router.post('/update', bucketController.update.post);
+
 module.exports = router;
