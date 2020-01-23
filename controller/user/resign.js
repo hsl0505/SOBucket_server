@@ -9,8 +9,12 @@ module.exports = {
     isValid(token, validToken => {
       userId = validToken.userInfo.id;
     });
-    users.destroy({ where: { id: userId } });
-    res.clearCookie('token');
-    res.redirect(200, '/');
+
+    users.destroy({ where: { id: userId } }).then(() => {
+      res
+        .clearCookie('token')
+        .status(200)
+        .send('ok');
+    });
   },
 };
