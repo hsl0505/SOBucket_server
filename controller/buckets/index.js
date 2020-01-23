@@ -13,4 +13,5 @@ module.exports = {
   test: require('./test'),
   findLikeList: require('./findLikeList'),
   update: require('./update'),
+  deleteBucket: require('./deleteBucket'),
 };
