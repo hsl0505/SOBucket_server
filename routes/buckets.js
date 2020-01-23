@@ -46,4 +46,7 @@ router.post('/comment', bucketController.comment.post);
 // * POST /buckets/update
 router.post('/update', bucketController.update.post);
 
+// * POST /buckets/deleteBucket
+router.post('/deleteBucket', bucketController.deleteBucket.post);
+
 module.exports = router;
