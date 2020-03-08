@@ -87,4 +87,22 @@
 </br>
 </br>
 
+# Back-End (내가 구현한 부분)
 
+### Directory Structure
+```
+SO Bucket Server
+├── README.md
+├── app.js
+├── config
+├── controller
+│   ├── buckets
+│   ├── index.js
+│   └── user
+├── env.sample
+├── migrations
+├── models
+├── package.json
+├── routes
+└── utils
+```
