@@ -563,5 +563,34 @@ Response
 </br>
 </br>
 
+**POST / resign**
+
+유저 회원탈퇴
+
+```
+/user/resign
+```
+
+Headers
+```JSON
+{
+  "Content-Type" : "application/json",
+}
+```
+
+Body
+```
+{}
+```
+
+Response
+```
+// 응답 성공 - 200
+// clearCookie (토큰 담겨있는 쿠키 삭제)
+'ok'
+```
+
+</br>
+</br>
 
 
