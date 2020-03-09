@@ -111,13 +111,114 @@ SO Bucket Server
 
 ### API Documentation  (내가 구현한 부분)
 
-#### Controller
+### Controller
 
 - buckets : 버킷에 관한 모든 것을 담당하는 컨트롤러입니다
 - user : 유저에 관한 모든 것을 담당하는 컨트롤러입니다
+
+Base URL : http://127.0.0.1:3001
+
 </br>
 
+### buckets controller
 
+</br>
+
+**POST / deleteBucket**
+
+버킷 삭제
+
+```
+/buckets/deleteBucket
+```
+
+Headers
+```JSON
+{
+  "Content-Type" : "application/json",
+}
+```
+
+Body
+```JSON
+{
+  "bucketId" : "1"
+}
+```
+
+Response
+```
+// 응답 성공 - 200
+'ok'
+
+// 응답 실패 - 404
+```
+
+</br>
+</br>
+
+**GET / findLikeList**
+
+자신이 좋아요 누른 버킷 목록 받아오기
+
+```
+/buckets/findLikeList
+```
+
+Response
+```
+// 응답 성공 - 200
+
+
+
+// 응답 실패
+
+```
+
+</br>
+</br>
+
+### user controller
+
+</br>
+
+**POST / login**
+
+유저 로그인
+
+```
+/user/login
+```
+
+Headers
+```JSON
+{
+  "Content-Type" : "application/json",
+}
+```
+
+Body
+```JSON
+{
+  "email" : "2@2",
+  "password" : "2"
+}
+```
+
+Response
+```JSON
+// 응답 성공 - 200
+{
+    "id": 2,
+    "userNickName": "현성2"
+}
+
+// 응답 실패 - 404
+"invaile user"
+```
+
+</br>
+</br>
 
 
 
