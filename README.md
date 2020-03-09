@@ -341,7 +341,39 @@ Response
 </br>
 </br>
 
+**POST / like**
 
+버킷에 좋아요 토글 기능
+
+```
+/buckets/like
+```
+
+Headers
+```JSON
+{
+  "Content-Type" : "application/json",
+}
+```
+
+Body
+```
+{ 
+  "isLike" : "false", // false일 시 좋아요 활성시킴, true이면 좋아요 비활성
+  "bucketId" : "5" 
+}
+```
+
+Response
+```
+// 응답 성공 - 200
+'ok'
+
+// 응답 실패 - 404
+```
+
+</br>
+</br>
 
 
 
@@ -376,7 +408,7 @@ Headers
 ```
 
 Body
-```JSON
+```
 {
   "email" : "2@2",
   "password" : "2"
@@ -384,7 +416,7 @@ Body
 ```
 
 Response
-```JSON
+```
 // 응답 성공 - 200
 {
     "id": 2,
