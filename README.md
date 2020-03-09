@@ -109,7 +109,7 @@ SO Bucket Server
 
 </br>
 
-### API Documentation  (내가 구현한 부분)
+## API Documentation  (내가 구현한 부분)
 
 ### Controller
 
@@ -434,7 +434,44 @@ Response
 </br>
 </br>
 
+**GET / search**
 
+버킷 검색
+
+```
+/buckets/search/?q="searchValue"
+```
+
+Response
+```
+// 응답 성공 - 200
+{
+    "searchBuckets": [
+        {
+            "id": 15,
+            "title": "타이틀테스트15",
+            "content": "내용테스트15",
+            "image": "이미지테스트15",
+            "expectedDate": "2020-01-22T09:46:08.000Z",
+            "createdAt": "2020-01-22T09:46:08.000Z",
+            "likeCount": 0,
+            "userNickName": "현성5",
+            "mylike": false
+        }
+    ]
+}
+
+// 응답 성공 - 일치하는 버킷 없을 시, 200
+{
+    "searchBuckets": []
+}
+
+
+// 응답 실패 - 404
+```
+
+</br>
+</br>
 
 
 
