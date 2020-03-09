@@ -594,3 +594,27 @@ Response
 </br>
 
 
+## ETC
+
+![토큰-쿠키1](https://user-images.githubusercontent.com/53073832/76211428-8dd67c00-6249-11ea-9feb-a32a88e330ab.png)
+</br>
+
+- JWT를 쿠키를 통해 주고받기 위해 Server app.js에서 cors middleware credential 설정
+
+</br>
+
+![쿠키_토큰2](https://user-images.githubusercontent.com/53073832/76211423-8ca54f00-6249-11ea-9c32-6ff22460a4ac.png)
+</br>
+
+- fetch api 사용 시, 쿠키 등 auth 관련 데이터를 주고 받기 위하여 credential 설정
+</br>
+
+![토큰_쿠키3](https://user-images.githubusercontent.com/53073832/76211429-8e6f1280-6249-11ea-8148-543c6d41ffe8.png)
+</br>
+
+- 로그인 시, http 응답에 cookie 설정하여 JWT를 담아보내줌, 이후 http 요청과 응답 시 쿠키에 JWT 존재
+</br>
+</br>
+
+
+
