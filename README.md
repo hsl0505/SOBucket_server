@@ -87,7 +87,7 @@
 </br>
 </br>
 
-# Back-End (내가 구현한 부분)
+# Back-End
 
 ### Directory Structure
 ```
@@ -106,3 +106,20 @@ SO Bucket Server
 ├── routes
 └── utils
 ```
+
+</br>
+
+### API Documentation  (내가 구현한 부분)
+
+#### Controller
+
+- buckets : 버킷에 관한 모든 것을 담당하는 컨트롤러입니다
+- user : 유저에 관한 모든 것을 담당하는 컨트롤러입니다
+</br>
+
+
+
+
+
+
+
