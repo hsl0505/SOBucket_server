@@ -157,9 +157,68 @@ Response
 </br>
 </br>
 
+**GET / mypage**
+
+mypage에서 자신이 작성한 버킷 목록 받아오기
+
+```
+/buckets/mypage
+```
+
+Response
+```
+// 응답 성공 - 200
+{
+    "bucketlists": [
+        {
+            "id": 7,
+            "title": "타이틀테스트7",
+            "image": "이미지테스트7",
+            "content": "내용테스트7",
+            "likeCount": 6,
+            "expectedDate": "2020-01-22T09:46:08.000Z",
+            "user_id": 2,
+            "createdAt": "2020-01-22T09:46:08.000Z",
+            "updatedAt": "2020-03-09T10:12:18.000Z",
+            "user": {
+                "userNickName": "현성2",
+                "avatar": "example"
+            },
+            "likes": [
+                {
+                    "user_id": 6
+                },
+                {
+                    "user_id": 7
+                },
+                {
+                    "user_id": 8
+                },
+                {
+                    "user_id": 16
+                },
+                {
+                    "user_id": 2
+                }
+            ],
+            "mylike": true
+        },
+        
+        ...
+        
+    ]
+}
+
+
+// 응답 실패 - 404
+```
+
+</br>
+</br>
+
 **GET / findLikeList**
 
-자신이 좋아요 누른 버킷 목록 받아오기
+mypage에서 자신이 좋아요 누른 버킷 목록 받아오기
 
 ```
 /buckets/findLikeList
