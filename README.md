@@ -247,6 +247,99 @@ Response
 </br>
 </br>
 
+**GET / home**
+
+홈 화면에 나올 버킷 가져오기 (랜덤 8개)
+
+```
+/buckets/home
+```
+
+Response
+```
+// 응답 성공 - 200
+{
+    "bucketList": [
+        {
+            "id": 10,
+            "title": "타이틀테스트10",
+            "content": "내용테스트10",
+            "image": "이미지테스트10",
+            "expectedDate": "2020-01-22T09:46:08.000Z",
+            "createdAt": "2020-01-22T09:46:08.000Z",
+            "likeCount": 0,
+            "userNickName": "현성2",
+            "mylike": false
+        },
+        {
+            "id": 18,
+            "title": "타이틀테스트18",
+            "content": "내용테스트18",
+            "image": "이미지테스트18",
+            "expectedDate": "2020-01-22T09:46:08.000Z",
+            "createdAt": "2020-01-22T09:46:08.000Z",
+            "likeCount": 0,
+            "userNickName": "현성3",
+            "mylike": false
+        },
+        
+        ... (총 8개)
+        
+    ]
+}
+
+// 응답 실패 - 404
+```
+
+</br>
+</br>
+
+**GET / today**
+
+홈 화면에 나올 베스트 버킷 가져오기 (좋아요 많은 순서대로 4개)
+
+```
+/buckets/home/today
+```
+
+Response
+```
+// 응답 성공 - 200
+{
+    "todayBucketList": [
+        {
+            "id": 7,
+            "title": "타이틀테스트7",
+            "content": "내용테스트7",
+            "image": "이미지테스트7",
+            "expectedDate": "2020-01-22T09:46:08.000Z",
+            "createdAt": "2020-01-22T09:46:08.000Z",
+            "likeCount": 6,
+            "userNickName": "현성2",
+            "mylike": true
+        },
+        {
+            "id": 12,
+            "title": "타이틀테스트12",
+            "content": "내용테스트12",
+            "image": "이미지테스트12",
+            "expectedDate": "2020-01-22T09:46:08.000Z",
+            "createdAt": "2020-01-22T09:46:08.000Z",
+            "likeCount": 5,
+            "userNickName": "현성5",
+            "mylike": true
+        },
+        
+        ... (총 4개)
+        
+    ]
+}
+
+// 응답 실패 - 404
+```
+
+</br>
+</br>
 
 
 
