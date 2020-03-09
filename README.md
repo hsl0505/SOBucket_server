@@ -168,15 +168,100 @@ Response
 Response
 ```
 // 응답 성공 - 200
+{
+    "likeList": [
+        {
+            "id": 12,
+            "title": "타이틀테스트12",
+            "image": "이미지테스트12",
+            "content": "내용테스트12",
+            "likeCount": 5,
+            "expectedDate": "2020-01-22T09:46:08.000Z",
+            "user_id": 3,
+            "createdAt": "2020-01-22T09:46:08.000Z",
+            "updatedAt": "2020-03-09T10:12:19.000Z",
+            "likes": [
+                {
+                    "user_id": 2
+                }
+            ],
+            "user": {
+                "userNickName": "현성5",
+                "avatar": "example"
+            },
+            "mylike": true
+        }
+    ]
+}
 
 
-
-// 응답 실패
-
+// 응답 실패 - 404
 ```
 
 </br>
 </br>
+
+**POST / fork**
+
+버킷 퍼가기
+
+```
+/buckets/fork
+```
+
+Headers
+```JSON
+{
+  "Content-Type" : "application/json",
+}
+```
+
+Body
+```JSON
+{
+  "title" : "타이틀",
+  "image" : "버킷이미지 url",
+  "content": "내용",
+  "expectedDate": "2020-00-00",
+}
+```
+
+Response
+```
+// 응답 성공 - 200
+{
+  id: 27
+  title: "타이틀테스트17"
+  image: "이미지테스트17"
+  content: "내용테스트17"
+  likeCount: 0
+  expectedDate: "2020-01-22T09:46:08.000Z"
+  user_id: 2
+  updatedAt: "2020-03-09T10:22:29.331Z"
+  createdAt: "2020-03-09T10:22:29.331Z"
+}
+
+// 응답 실패 - 404
+```
+
+</br>
+</br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### user controller
 
@@ -214,7 +299,7 @@ Response
 }
 
 // 응답 실패 - 404
-"invaile user"
+"invaild user"
 ```
 
 </br>
