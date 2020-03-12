@@ -19,7 +19,6 @@
 - **임현성 (팀원, Full-Stack)**
 
   - Front
-    - Client 기본 구조 및 레이아웃 구현
     - React-router-dom을 활용하여 주요 화면 별 라우팅 설계 및 이를 통한 SPA 구현
     - Card, Like, Fork button 등 재사용 가능한 컴포넌트 설계
     - 빠른 UI 구현을 위해 AntDesign 활용
