@@ -108,6 +108,11 @@ SO Bucket Server
 
 </br>
 
+## Database Schima
+![database_schima()](https://user-images.githubusercontent.com/53073832/76617519-cb007e00-6569-11ea-908f-e1e4f4c898bf.png)
+
+</br>
+
 ## API Documentation  (내가 구현한 부분)
 
 ### Controller
